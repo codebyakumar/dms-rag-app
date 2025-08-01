@@ -1,7 +1,7 @@
 version: "3.8"
 services:
   postgres:
-    image: postgres:17
+    image: postgres:14
     ports:
       - "5432:5432"
     environment:
@@ -23,7 +23,7 @@ services:
   backend-python:
     build: ./backend-python
     ports:
-      - "5000:5000"
+      - "5001:5000"
     depends_on:
       - postgres
     env_file:
@@ -32,7 +32,7 @@ services:
   frontend:
     build: ./frontend-react
     ports:
-      - "3000:3000"
+      - "3000:80"
     depends_on:
       - backend-node
 

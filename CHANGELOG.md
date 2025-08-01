@@ -11,6 +11,13 @@ All notable changes to this project will be documented here.
 - Dockerfiles and docker-compose setup
 - README.md files for each module
 
+</hr>
+
+### Updated
+- Configured the docker compose for all three services and used it to run the application
+
+
+
 ---
 
 ## [Unreleased]

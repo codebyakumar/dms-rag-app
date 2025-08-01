@@ -1,21 +1,21 @@
-# Use an official Node.js image
+# Use Node.js image
 FROM node:18
 
-# Create app directory
+# Set working directory
 WORKDIR /usr/src/app
 
-# Install app dependencies
+# Copy package files and install
 COPY package*.json ./
 RUN npm install
 
-# Copy app source
+# Copy source code
 COPY . .
 
-# Build TypeScript (optional if using ts-node)
+# Build TypeScript to dist/
 RUN npm run build
 
-# Expose backend port
+# Expose port
 EXPOSE 4000
 
-# Run the application (use ts-node-dev or node dist)
+# Run compiled JS
 CMD ["npm", "run", "start"]
