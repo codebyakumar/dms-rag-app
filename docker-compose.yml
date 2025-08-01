@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  postgres:
+    image: postgres:17
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ragdb
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend-node:
+    build: ./backend-node
+    ports:
+      - "4000:4000"
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+
+  backend-python:
+    build: ./backend-python
+    ports:
+      - "5000:5000"
+    depends_on:
+      - postgres
+    env_file:
+      - .env
+
+  frontend:
+    build: ./frontend-react
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend-node
+
+volumes:
+  pgdata:
