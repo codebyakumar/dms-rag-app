@@ -15,6 +15,7 @@ All notable changes to this project will be documented here.
 
 ### Updated
 - Configured the docker compose for all three services and used it to run the application
+- Updated the ci-dev file for ci for dev
 
 
 
