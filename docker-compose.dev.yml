@@ -1,0 +1,29 @@
+services:
+  backend-node:
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - postgres-dev
+
+  backend-python:
+    environment:
+      - PYTHON_ENV=development
+    depends_on:
+      - postgres-dev
+
+  frontend:
+    environment:
+      - REACT_APP_ENV=development
+  
+  postgres-dev:
+    image: postgres:14
+    container_name: postgres-dev
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    volumes:
+      - pgdata-dev:/var/lib/postgresql/data

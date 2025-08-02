@@ -1,40 +1,26 @@
-version: "3.8"
 services:
-  postgres:
-    image: postgres:14
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: ragdb
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
   backend-node:
     build: ./backend-node
-    ports:
-      - "4000:4000"
-    depends_on:
-      - postgres
+    container_name: backend-node
     env_file:
       - .env
+    ports:
+      - "4000:4000"
 
   backend-python:
     build: ./backend-python
-    ports:
-      - "5001:5000"
-    depends_on:
-      - postgres
+    container_name: backend-python
     env_file:
       - .env
+    ports:
+      - "5001:5000"
 
   frontend:
     build: ./frontend-react
+    container_name: frontend
     ports:
       - "3000:80"
-    depends_on:
-      - backend-node
 
 volumes:
-  pgdata:
+  pgdata-dev:
+  pgdata-stage:
